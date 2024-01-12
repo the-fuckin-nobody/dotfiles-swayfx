@@ -38,7 +38,7 @@ There's a few steps involved in the installation process:
 
     Alternatively you can use the following command to install all of the above packages:
     ```
-    sudo pacman -Syyu foot waybar fish starfish neovim dusnt kvantum qt5ct qt6ct swayimg slurp pacman-contrib jq ttf-iosevkaterm-nerd ttf-fantasque-nerd
+    sudo pacman -Syyu foot waybar fish starship neovim dusnt kvantum qt5ct qt6ct swayimg slurp pacman-contrib jq ttf-iosevkaterm-nerd ttf-fantasque-nerd
     ```
 
 1. Install the following packages from the [**AUR**](https://aur.archlinux.org), manually or from your favourite AUR helper like [**paru**](https:/github.com/https://github.com/Morganamilo/paru):
