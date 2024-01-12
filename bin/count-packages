@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PACKAGE_COUNT=`pacman -Qs | wc -l`
+IS_DISCONNECTED=`nmcli general status | grep -c "disconnected"`
+if [[ $IS_DISCONNECTED -eq 1 ]]; then
+	FETCH_UPDATES=`pacman -Qu | wc -l`
+elif [[ $IS_DISCONNECTED -eq 0 ]]; then 
+	FETCH_UPDATES=`checkupdates -u | wc -l`
+fi
+N_UPDATES=$FETCH_UPDATES
+echo "{\"text\":\"$FETCH_UPDATES/$PACKAGE_COUNT\", \"tooltip\":\"$N_UPDATES Updates Available\n$PACKAGE_COUNT Packages Currently Installed\"}"

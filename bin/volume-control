@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+# Icons
+iDIR="$HOME/.config/dunst/icons"
+notify_cmd='notify-send -u low -h string:x-canonical-private-synchronous:system-notifications'
+
+# Get Volume
+get_volume() {
+	# Replace this with your command to get the decimal volume
+	decimal_volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f2)
+
+# Convert the decimal volume to a percentage
+	percentage=$(awk -v volume="$decimal_volume" 'BEGIN { printf "%.0f\n", volume * 100 }')
+
+
+	echo "$percentage"
+}
+
+# Get icons
+get_icon() {
+	current="$(get_volume)"
+	if [[ "$current" -eq "0" ]]; then
+		icon="$iDIR/volume-zero.svg"
+	elif [[ ("$current" -ge "0") && ("$current" -le "19") ]]; then
+		icon="$iDIR/volume-low.svg"
+	elif [[ ("$current" -ge "20") && ("$current" -le "39") ]]; then
+		icon="$iDIR/volume-below-mid.svg"
+	elif [[ ("$current" -ge "40") && ("$current" -le "59") ]]; then
+		icon="$iDIR/volume-mid.svg"
+	elif [[ ("$current" -ge "60") && ("$current" -le "79") ]]; then
+		icon="$iDIR/volume-above-mid.svg"
+	elif [[ ("$current" -ge "80") && ("$current" -le "100") ]]; then
+		icon="$iDIR/volume-full.svg"
+	elif [[ ("$current" -ge "101") ]]; then
+		icon="$iDIR/volume-over.svg"
+	fi
+}
+
+# Notify
+notify_user() {
+	${notify_cmd} -h int:value:$(get_volume) -i "$icon" "Volume $1 $(get_volume)%"
+}
+
+# Increase Volume
+inc_volume() {
+	[[ $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f3) == "[MUTED]" ]] &&  wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+	wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 1%+ && get_icon && notify_user 'raised to'
+}
+
+# Decrease Volume
+dec_volume() {
+	[[ $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f3) == "[MUTED]" ]] &&  wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%- && get_icon && notify_user 'lowered to '
+}
+
+# Toggle Mute
+toggle_mute() {
+	output=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f3)
+	if test -z "$output"; then
+		wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && ${notify_cmd} -i "$iDIR/volume-mute.svg" "Muted"
+	else
+		wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && get_icon && ${notify_cmd} -i  "$icon" "Unmuted"
+	fi
+}
+
+# Toggle Mic
+toggle_mic() {
+	ID="$(pulsemixer --list-sources | grep 'Default' | cut -d',' -f1 | cut -d' ' -f3)"
+	if [[ $(pulsemixer --id $ID --get-mute) == 0 ]]; then
+		pulsemixer --id ${ID} --toggle-mute && ${notify_cmd} -i "$iDIR/microphone-hardware-disabled-symbolic.svg" "Microphone Switched OFF"
+	else
+		pulsemixer --id ${ID} --toggle-mute && ${notify_cmd} -i "$iDIR/microphone.png" "Microphone Switched ON"
+	fi
+}
+
+# Execute accordingly
+if [[ -x $(which pulsemixer) ]]; then
+	if [[ "$1" == "--get" ]]; then
+		get_volume
+	elif [[ "$1" == "--inc" ]]; then
+		inc_volume
+	elif [[ "$1" == "--dec" ]]; then
+		dec_volume
+	elif [[ "$1" == "--toggle" ]]; then
+		toggle_mute
+	elif [[ "$1" == "--toggle-mic" ]]; then
+		toggle_mic
+	else
+		echo $(get_volume)%
+	fi
+fi

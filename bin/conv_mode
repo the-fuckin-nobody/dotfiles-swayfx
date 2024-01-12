@@ -1,0 +1,42 @@
+#!/usr/bin/bash
+#
+CONV_MODE_STATUS=$(< /sys/devices/pci0000:00/0000:00:1f.0/PNP0C09:00/VPC2004:00/conservation_mode)
+
+get_stats() {
+	TEXT="<big><span foreground='#76946a'>󱈑</span></big> ~ "
+
+	if [[ "$CONV_MODE_STATUS" == "0" ]]; then
+		ICON=""
+		TOOLTIP="Conservation mode off"
+		CLASS="off"
+	else
+		ICON=""
+		TOOLTIP="<b>Battery Conservation mode on</b>"
+		CLASS="on"
+	fi
+
+	echo "{\"text\":\"$TEXT$ICON\", \"tooltip\":\"$TOOLTIP\", \"class\":\"$CLASS\"}"
+}
+
+get_passwd() {
+	PASS=$($HOME/.local/bin/rofi_askpass $USER)
+	if [[ -z "$PASS" ]]; then
+		exit
+	fi
+}
+
+toggle(){
+	if [[ "$CONV_MODE_STATUS" == "0" ]]; then
+		sudo -A echo 1 > /sys/devices/pci0000:00/0000:00:1f.0/PNP0C09:00/VPC2004:00/conservation_mode
+	else
+		sudo -A echo 0 > /sys/devices/pci0000:00/0000:00:1f.0/PNP0C09:00/VPC2004:00/conservation_mode
+	fi
+}
+
+if [[ "$1" == "--stats" ]]; then
+	get_stats
+elif [[ "$1" == "--toggle" ]]; then
+	toggle
+else
+	echo "Error"
+fi

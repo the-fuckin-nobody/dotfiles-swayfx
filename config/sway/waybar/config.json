@@ -1,0 +1,295 @@
+{
+	"height": 30,
+	"mod": "dock",
+	"spacing": 0,
+	"margin": "5px 5px 0px 5px",
+	"layer": "top",
+	"position": "top",
+	"fixed-center": true,
+	"exclusive": true,
+	"passthrough": false,
+	"gtk-layer-shell": true,
+	"modules-left": [
+		"group/left",
+	],
+	"modules-center": [
+        "sway/window",
+		"sway/workspaces",
+		"custom/packages"
+	],
+	"modules-right": [
+		"custom/conv_mode",
+		"network",
+		"wireplumber",
+		"backlight",
+		"battery",
+		"tray",
+		"group/sysmenu"
+	],
+    "sway/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1:term": "",
+            "2:web": "",
+            "3:files": "",
+            "4:dev": "",
+            "5:office": "",
+            "6:chat": "",
+            "7:media": "󰑈",
+            "8:misc": ""
+        },
+        "disable-scroll": false,
+        "smooth-scrolling-threshold": 5
+    },
+    "sway/window": {
+        "format": "{app_id}",
+        "max-length": 15,
+        "tooltip": true,
+        "rewrite": {
+            "(.*) - (.*)": "$1"
+        },
+        "tooltip-format": "{title}",
+        "icon": true,
+        "icon-size": 24
+    },
+	"sway/mode": {
+		"format": " {}"
+	},
+	"idle_inhibitor": {
+		"format": "<big><b>{icon}</b></big>",
+		"format-icons": {
+			"activated": "",
+			"deactivated": ""
+		}
+	},
+	"tray": {
+		"icon-size": 24
+	},
+	"clock": {
+		"format": "<span foreground=\"#7fb4ca\"><big>󰥔 </big></span>{:%Hh %Mm %Ss}",
+		"interval": 1,
+		"format-alt": "<span foreground=\"#7fb4ca\" ><big>󰃭 </big></span>{:%A, %B %d, %Y}",
+		"tooltip-format": "<small><span font=\"JetBrains Mono 10\">{calendar}</span></small>",
+		"calendar": {
+			"mode"          : "month",
+			"weeks-pos"		: "left",
+			"format": {
+				"months":     "<span color='#d27e99' font=\"JetBrains Mono 11\"><b>{}</b></span>",
+				"days":       "<span color='#dcd7ba'>{}</span>",
+				"weeks":      "<span color='#98bb6c'><b>W{}</b></span>",
+				"weekdays":   "<span color='#aad4d5'><b>{}</b></span>",
+				"today":      "<span color='#658594'><b><u>{}</u></b></span>"
+			}
+		}
+	},
+	"group/left": {
+		"modules": [
+            "custom/launcher",
+			"cpu",
+			"custom/memory",
+			"disk",
+            "clock",
+            "idle_inhibitor"
+		],
+		"orientation": "horizontal"
+	},
+	"cpu": {
+		"interval": 2,
+		"on-click": "foot -e btop",
+		"format": "<span foreground='#d27e99'><big> </big></span>{usage}%",
+		"tooltip": true
+	},
+	"memory": {
+		"format": "{}% "
+	},
+	"backlight": {
+		"on-scroll-up": "brightness-control --dec 1",
+		"on-scroll-down": "brightness-control --inc 1",
+		"device": "intel_backlight",
+		"format": "<span foreground='#08bdba'><big>{icon}</big></span>{percent}%",
+		"tooltip": false,
+		"format-icons": [
+			"󱩏 ",
+			"󱩐 ",
+			"󱩑 ",
+			"󱩒 ",
+			"󱩓 ",
+			"󱩔 ",
+			"󱩕 ",
+			"󱩖 ",
+			"󰛨 "
+		]
+	},
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 40,
+			"critical": 20
+		},
+		"interval": 2,
+		"format": "<big>{icon}</big>{capacity}%",
+		"format-full": "<big>{icon}</big>{capacity}%",
+		"format-charging": "<span foreground='#98bb6c'><big>{icon}</big></span>{capacity}%",
+		"format-plugged": "<span foreground='#98bb6c'> </span>{capacity}%",
+		"format-alt": "{icon}{time}",
+		"format-icons": {
+			"default": [
+				"<span foreground='#ff5d62'>󰂎 </span>",
+				"<span foreground='#ff5d62'>󰂎 </span>",
+				"<span foreground='#ff9e3b'>󱊡  </span>",
+				"<span foreground='#ff9e3b'>󱊡 </span>",
+				"<span foreground='#ff9e3b'>󱊡 </span>",
+				"<span foreground='#e6c384'>󱊢 </span>",
+				"<span foreground='#e6c384'>󱊢 </span>",
+				"<span foreground='#e6c384'>󱊢 </span>",
+				"<span foreground='#98bb6c'>󱊢 </span>",
+				"<span foreground='#98bb6c'>󱊣 </span>",
+				"<span foreground='#98bb6c'>󱊣 </span>"
+			],
+			"charging": [
+				"<span foreground='#98bb6c'>󰢟 </span>",
+				"<span foreground='#98bb6c'>󰢟 </span>",
+				"<span foreground='#98bb6c'>󱊤 </span>",
+				"<span foreground='#98bb6c'>󱊤 </span>",
+				"<span foreground='#98bb6c'>󱊤 </span>",
+				"<span foreground='#98bb6c'>󱊥 </span>",
+				"<span foreground='#98bb6c'>󱊥 </span>",
+				"<span foreground='#98bb6c'>󱊥 </span>",
+				"<span foreground='#98bb6c'>󱊥 </span>",
+				"<span foreground='#98bb6c'>󱊦 </span>",
+				"<span foreground='#98bb6c'>󱊦 </span>"
+			]
+		}
+	},
+	"network": {
+		"interval": 1,
+		"format-wifi": "<span foreground='#d27e99'><big>{icon}</big></span>{essid} <span foreground='#98bb6c'><big>󰓢</big></span> {bandwidthTotalBytes}",
+		"format-ethernet": "{ipaddr}/{cidr} <span foreground='#d27e99'></span>",
+		"tooltip-format": "<span foreground='#d27e99'><big>{icon}</big></span>{essid} ({signalStrength}%)",
+		"tooltip-format-disconnected": "<span foreground='#ff5d62'><big>󰤭 </big>Offline</span>",
+		"format-linked": "{ifname} (No IP) <span foreground='#d27e99'></span>",
+		"format-disconnected": "<big>󰤭 </big>Disconnected",
+		"format-disabled": "<big>󱚼 </big>Disabled",
+		"format-icons": [
+			"󱛏 ",
+			"󱛋 ",
+			"󱛌 ",
+			"󱛍 ",
+			"󱛎 "
+		],
+		"on-click": "killall rofi || networkmanager_dmenu"
+	},
+	"wireplumber": {
+		"scroll-step": 1,
+		"max-volume": 150,
+		"format": "<span foreground='#7e9cd8'><big>{icon}</big></span>{volume}%",
+		"format-bluetooth": "{volume}% {icon}<big></big> {format_source}",
+		"format-bluetooth-muted": " {icon}<big></big> {format_source}",
+		"format-muted": "<big>󰝟 </big>Muted",
+		"format-source": "{volume}%",
+		"format-source-muted": "<span foreground='#ff5d62'></span>",
+		"format-icons": {
+			"headphone": "󰋋 ",
+			"headphone-muted": "󰟎 ",
+			"hands-free": " ",
+			"headset": " ",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": [
+				" ",
+				" ",
+				" ",
+				"󱄠 "
+			]
+		},
+		"on-click": "volume-control --toggle"
+	},
+	"disk": {
+		"interval": 30,
+		"format": "<span foreground='#e6c384'></span> {free}",
+		"tooltip": true,
+		"tooltip-format": "{used} used of {total}"
+	},
+	"custom/memory": {
+		"format": "<span foreground='#ffa066'><big>{icon}</big></span> {}",
+		"format-icons": [
+			""
+		],
+		"tooltip-format": "{tooltip}",
+		"exec": "mem-info",
+		"return-type": "json",
+		"interval": 1,
+		"on-click": "foot -e btop"
+	},
+	"custom/packages": {
+		"format": "<span foreground='#a3d4d5'><big>{icon}</big></span> {}",
+		"format-icons": [
+			"󰚰"
+		],
+		"tooltip-format": "{tooltip}",
+		"exec": "count-packages",
+		"signal": 8,
+		"return-type": "json",
+		"interval": 3600,
+		"on-click": "foot -e sudo pacman -Syyu"
+	},
+
+	"custom/launcher": {
+		"format": "<big>{icon}</big>",
+		"format-icons": [
+			""
+		],
+		"tooltip-format": "{tooltip}",
+		"exec": "echo '{\"text\":\"Apps\", \"tooltip\":\"<big> </big>Application Launcher\"}'",
+		"on-click": "killall rofi || application-launcher",
+		"return-type": "json"
+	},
+	"custom/conv_mode": {
+		"format": "{}",
+		"exec": "conv_mode --stats",
+		"on-click": "exec conv_mode --toggle",
+		"return-type": "json",
+		"interval": 1
+	},
+	"group/sysmenu": {
+		"modules": [
+			"custom/poweroff",
+			"custom/lock-screen",
+			"custom/exit-session",
+			"custom/reboot"
+		],
+		"orientation": "horizontal",
+		"drawer": {
+
+		}
+	},
+	"custom/poweroff": {
+		"format": "<big>{}</big>",
+		"tooltip-format": "{tooltip}",
+		"exec": "echo '{\"text\":\"󰐥\", \"tooltip\":\"Power Off 󰐥\"}'",
+		"on-click": "killall rofi || confirm-prompt poweroff",
+		"return-type": "json"
+	},
+	"custom/reboot": {
+		"format": "{}",
+		"exec": "echo '{\"text\":\"󰜉\", \"tooltip\":\"Reboot 󰜉\"}'",
+		"tooltip-format": "{tooltip}",
+		"on-click": "killall rofi || confirm-prompt reboot",
+		"return-type": "json"
+	},
+	"custom/lock-screen": {
+		"format": "{}",
+		"exec": "echo '{\"text\":\"󰌾\", \"tooltip\":\"Lock Screen 󰌾\"}'",
+		"tooltip-format": "{tooltip}",
+		"on-click": "killall rofi || confirm-prompt lock-screen",
+		"return-type": "json"
+	},
+	"custom/exit-session": {
+		"format": "{}",
+		"exec": "echo '{\"text\":\"󰿅\", \"tooltip\":\"Exit Session 󰿅\"}'",
+		"tooltip-format": "{tooltip}",
+		"on-click": "killall rofi || confirm-prompt hyprctl dispatch exit",
+		"return-type": "json"
+	}
+}

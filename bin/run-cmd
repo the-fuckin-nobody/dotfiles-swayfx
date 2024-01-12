@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+THEME_DIR="~/.config/rofi/"
+
+rofi -show run -theme "$THEME_DIR/runner.rasi"

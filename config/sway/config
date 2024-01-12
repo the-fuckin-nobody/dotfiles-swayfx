@@ -1,0 +1,117 @@
+include colors
+include input
+include output
+include keybinds
+include variables
+
+xwayland disable
+scratchpad_minimize disabled
+workspace_layout default
+workspace_auto_back_and_forth no
+default_floating_border pixel 0px
+
+default_border pixel 2px
+floating_modifier $mod normal
+focus_follows_mouse yes
+focus_on_window_activation smart
+
+layer_effects {
+    "waybar" blur enable; corner_radius 20;shadows enable;blur_ignore_transparent enable
+    "rofi" blur enable; corner_radius 5;shadows enable;blur_ignore_transparent enable
+    # "panel" blur enable; corner_radius 5
+    "notifications" blur enable; corner_radius 10;shadows enable;blur_ignore_transparent enable
+}
+
+blur enable
+blur_xray disable
+blur_passes 3
+blur_radius 5
+blur_noise 0.00
+blur_brightness 2
+blur_contrast 0.9
+blur_saturation 1.08
+shadows enable
+shadow_blur_radius 5
+shadow_color #16161dbb
+shadow_offset 0 0
+shadows_on_csd enable
+
+corner_radius 5
+smart_corner_radius disable
+
+tiling_drag disable
+
+popup_during_fullscreen smart
+gaps {
+    inner 10px
+    outer 0px
+}
+
+smart_gaps off
+exec_always --no-startup-id '~/.config/sway/bin/autostart.sh'
+
+exec  dbus-update-activation-environment --systemd --all
+exec systemctl --user import-environment QT_QPA_PLATFORMTHEME
+
+exec swayidle timeout 240 'lock-screen' timeout 300 'swaymsg output eDP-1 power off' resume 'swaymsg output eDP-1 power on' before-sleep 'lock-screen'
+
+exec_always gsettings set org.gnome.desktop.interface {
+    gtk-theme "Kanagawa-B-LB"
+    font-name "Fantasque Sans Mono 10"
+    icon-theme "Qogir-dark"
+    cursor-size "24"
+    cursor-theme "Captaine-Kanagawa-cursors"
+    cursor-blink true
+    monospace-font-name "Iosevka Term Curly 10"
+    document-font-name "Iosevka Fixed Slab 10"
+    enable-animations true
+}
+exec gsettings set org.gnome.desktop.wm.preferences theme "Kanagawa-B-LB"
+
+for_window {
+	[urgent="latest"] focus
+	[app_id="foot|alacritty|kitty"] focus
+	[app_id="chromium|firefox|firefoxdeveloperedition|google-chrome|org.qutebrowser.qutebrowser"] focus
+	[title=".*Opera"] focus
+	[app_id="dolphin|thunar|ranger|evince|org.pwmt.zathura|"] focus
+	[app_id="code-url-handler|nvim.*|vim.*"] focus
+	[app_id="libreoffice"] focus
+	[app_id="discord|telegram-desktop|signal-desktop"] focus
+	[app_id="vlc|mpv"] focus
+	[app_id="kvantummanager|qt5ct|qt6ct"] focus
+	[app_id="org.telegram.desktop"] focus
+	[app_id="docnf-editor|pavucontrol"] focus
+}
+
+# Floating windows
+for_window {
+	[app_id="org\..*\.polkit-.*-authentication-agent-1"] floating enable
+	[title="Save As"] floating enable
+	[title="Copying.*"] floating enable
+	[title="Move.*"] floating enable
+	[title="Moving.*"] floating enable
+	[title="Open File"] floating enable
+	[title="Save.*"] floating enable
+	[title="Sign In.*|Library"] floating enable
+	[title="Transferring.*"] floating enable
+	[title="^zip.*|extract.*|Extract.*|unzip.*"] floating enable
+	[title="New Text Note — Okular"] floating enable
+	[title="Select.*"] floating enable
+	[app_id="swayimg.*|imv"] floating enabled
+	[app_id="swayimg.*"] border pixel 0
+    [title="Picture-in-Picture"] floating enabled 
+}
+# Assign workspaces to programs
+assign {
+	[app_id="chromium|firefox|google-chrome|org.qutebrowser.qutebrowser"] workspace $ws2
+	[title=".*Opera"] workspace $ws2
+	[app_id="ark|dolphin|thunar"] workspace $ws3
+	[app_id="code-oss|nvim.*|vim.*"] workspace $ws4
+	[app_id="nvim"] workspace $ws4
+	[app_id="libreoffice|okular|evince|org.pwmt.zathura"] workspace $ws5
+	[app_id="discord|org.telegram.desktop|signal-desktop"] workspace $ws6
+	[app_id="vlc|mpv|.*obs.*"] workspace $ws7
+	[app_id="kvantummanager|qt5ct|qt6ct|font-manager|.*settings.*|docnf-editor|pavucontrol"] workspace $ws8
+}
+
+

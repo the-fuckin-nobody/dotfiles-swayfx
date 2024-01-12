@@ -1,0 +1,82 @@
+set $mod Mod4
+
+bindsym {
+    $mod+Shift+e exec end-session
+    $mod+Shift+r exec swaymsg reload
+    $mod+q exec swaymsg kill
+    $mod+Shift+space exec swaymsg floating toggle
+    $mod+Tab split toggle
+    $mod+f fullscreen
+}
+
+bindsym {
+    $mod+l focus right
+    $mod+h focus right
+    $mod+j focus down
+    $mod+k focus up
+    $mod+Shift+l move right
+    $mod+Shift+h move left
+    $mod+Shift+j move down
+    $mod+Shift+k move up
+    $mod+Shift+minus move window to scratchpad
+    $mod+minus scratchpad show
+    $mod+1 workspace $ws1
+    $mod+2 workspace $ws2
+    $mod+3 workspace $ws3
+    $mod+4 workspace $ws4
+    $mod+5 workspace $ws5
+    $mod+6 workspace $ws6
+    $mod+7 workspace $ws7
+    $mod+8 workspace $ws8
+    $mod+Shift+1 move window to workspace $ws1
+    $mod+Shift+2 move window to workspace $ws2
+    $mod+Shift+3 move window to workspace $ws3
+    $mod+Shift+4 move window to workspace $ws4
+    $mod+Shift+5 move window to workspace $ws5
+    $mod+Shift+6 move window to workspace $ws6
+    $mod+Shift+7 move window to workspace $ws7
+    $mod+Shift+8 move window to workspace $ws8
+    $mod+t focus mode_toggle 
+}
+
+bindsym {
+    $mod+Control+l move window to workspace next
+    $mod+Control+h move window to workspace prev
+
+}
+#Launching apps
+bindsym {
+    $mod+d exec killall rofi > /dev/null || application-launcher
+    $mod+w exec killall rofi > /dev/null || window-selector
+    $mod+r exec killall rofi > /dev/null || run-cmd
+    $mod+x exec killall rofi > /dev/null || powermenu
+    $mod+s exec killall rofi > /dev/null || screenshot-menu
+    $mod+n exec killall rofi > /dev/null || networkmanager_dmenu
+    $mod+period exec killall rofi > /dev/null || emoji-selector
+    $mod+p exec color-picker
+}
+bindsym {
+    $mod+Return workspace 1:term;exec $term
+    $mod+Shift+Return exec $term
+    $mod+Shift+w exec $browser
+    $mod+Shift+d exec dolphin
+    $mod+Shift+c exec code
+    $mod+Shift+n exec foot -e nvim
+}
+
+bindsym {
+    XF86AudioMute exec volume-control --toggle
+    XF86AudioRaiseVolume exec volume-control --inc
+    XF86AudioLowerVolume  exec volume-control --dec
+    XF86MonBrightnessUp exec brightness-control --inc 1
+    XF86MonBrightnessDown exec brightness-control --dec 1
+    Print exec screenshot --full
+    $mod+Print exec screenshot --area
+    $mod+Shift+Print exec screenshot 
+}
+
+bindswitch --reload --locked lid:on exec lock-screen ; output eDP-1 power off
+bindswitch --reload --locked lid:off output eDP-1 power on
+
+bindgesture swipe:3:right workspace prev
+bindgesture swipe:3:left workspace next

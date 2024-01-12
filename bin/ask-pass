@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+DIR="$HOME/.config"
+RASI="$DIR/rofi/askpass.rasi"
+
+# Rofi text dialog to get password
+rofi -dmenu \
+     -password \
+     -i \
+     -p "$1" \
+     -theme ${RASI}
+

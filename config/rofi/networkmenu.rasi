@@ -1,0 +1,185 @@
+/*****----- Global Properties -----*****/
+@import                          "shared/colors.rasi"
+@import                          "shared/fonts.rasi"
+
+
+/*****----- Main Window -----*****/
+window {
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    0;
+    anchor:                      0; 
+    fullscreen:                  false;
+    width:                       600px;
+    height:                      500px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    /* properties for all widgets */
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    shadow:                      10px;
+    border:                      2px solid;
+    border-color:                @bordercolor;
+    border-radius:               5px;
+    cursor:                      "default";
+    background-color:            @background;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     10px;
+    border:                      0px solid;
+    border-radius:               0px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "message", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      40px 50px 30px 50px;  
+    padding:                     0px;
+    border:                      0px;
+    border-radius:               5px;
+    background-color:            transparent;
+    text-color:                  @foreground-alt;
+    children:                    [ "prompt", "textbox-prompt-colon", "entry"];
+}
+
+prompt {
+    enabled:                     true;
+    spacng:                      0px;
+    padding:                     5px 10px;
+    margin:                      0 5px 0 0;
+    border-radius:               5px;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    font:                        "FantasqueSansM Nerd Font Propo 10";
+    font-style:                  bold;
+    background-color:            @prompt-background;
+    text-color:                  @selected-foreground;
+}
+textbox-prompt-colon {
+    enabled:                     true;
+    padding:                     5px 10px;
+    margin:                      0px;
+    expand:                      false;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    str:                         "";
+    font:			             "JetBrainsMono Nerd Font Propo 13";
+    background-color:            @inner-bordercolor;
+    border:                      0px;
+    border-radius:               5px 0px 0px 5px solid;
+    border-color:                @inner-bordercolor;
+    text-color:                  @selected-foreground;
+}
+entry {
+    enabled:                     true;
+    padding:                     10px 5px;
+    margin:                      0px;
+    border:                      1px;
+    border-radius:               0px 5px 5px 0px;
+    border-color:                @inner-bordercolor;
+    vertical-align:              0.5;
+    background-color:            @background-alt;
+    text-color:                  @foreground-alt;
+    cursor:                      text;
+    font:                        "FantasqueSansM Nerd Font Propo 10";
+    placeholder:                 "Search...";
+    placeholder-color:           inherit;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       5;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     5px;
+    margin:                      0px 30px 5px 30px;
+    padding:                     0px 0px 0px 0px;
+    border:                      0px 0px 0px 0px solid;
+    border-radius:               0px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      "default";
+}
+
+scrollbar {
+    background-color:            @background-alt;
+    handle-width:                5px;
+}
+
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    background-color:            @background;
+    orientation:                 vertical;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+}
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+element normal.urgent {
+    background-color:            @background-alt;
+    text-color:                  @urgent-background;
+}
+element selected.normal {
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+
+element selected.urgent {
+    background-color:            @urgent-background;
+    text-color:                  @selected-foreground;
+}
+
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  var(foreground);
+}
+element alternate.urgent {
+    background-color:            transparent;
+    text-color:                  var(foreground);
+}
+element alternate.active {
+    background-color:            transparent;
+    text-color:                  var(foreground);
+}
+
+
+element-text {
+    padding:                     15px;
+    border-radius:               5px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+	font:						 "FantasqueSansM Nerd Font Propo 10";
+    cursor:                      inherit;
+    highlight:			 inherit;
+    vertical-align:              0.5;
+}
+
+element-text selected {
+    background-color:            @selected-background;
+    text-color:                  @selected-foreground;
+}

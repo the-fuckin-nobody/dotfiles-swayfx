@@ -1,0 +1,31 @@
+# Touchpad configuration
+input "1267:12926:ELAN0001:00_04F3:327E_Touchpad" {
+	click_method	clickfinger
+	accel_profile	adaptive
+	drag		enabled
+	events		{
+        enabled
+        disabled_on_external_mouse
+    }
+	natural_scroll	enabled
+	pointer_accel	0.6
+	scroll_factor	0.7
+	scroll_method	two_finger
+	tap		enabled
+	tap_button_map	lrm
+    middle_emulation enabled
+}
+
+input "ELAN0001:00_04F3:327E_Mouse" {
+    natural_scroll enabled
+    accel_profile adaptive
+}
+
+seat seat0 {
+	xcursor_theme Captaine-Kanagawa-cursors 24
+	attach *
+    hide_cursor {
+        5000
+        when-typing enabled
+    }
+}

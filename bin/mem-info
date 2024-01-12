@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+with open("/proc/meminfo", "r") as file:
+    data = {};
+    while (line := file.readline().strip().split())[0] != "SwapCached:":
+        data[line[0].rstrip(':').lstrip('Mem')] = eval(line[1]) / 1024**2
+    data['Used'] = data['Total'] - (data['Free'] + data['Cached'] + data['Buffers'])
+    data['Available'] = data['Total'] - data['Used']
+    print(f"""{{"text":"{data['Used']:0.2f}GiB", "tooltip":"Total: {data['Total']:0.2f} GiB\\nAvailable: {data['Available']:0.2f} GiB\\nFree: {data['Free']:0.2f} GiB\\nCached: {data['Cached']:0.2f} GiB\\nBufers: {data['Buffers']:0.2f} GiB"}}""")

@@ -1,0 +1,87 @@
+@define-color	fujiWhite		#DCD7BA;
+@define-color	oldWhite		#C8C093;
+@define-color	sumiInk0		#16161D;
+@define-color	sumiInk1		#1F1F28;
+@define-color	sumiInk2		#2A2A37;
+@define-color	sumiInk3		#363646;
+@define-color	sumiInk4		#54546D;
+@define-color	waveBlue1		#223249;
+@define-color	waveBlue2		#2D4F67;
+@define-color	winterGreen		#2B3328;
+@define-color	winterYellow	#49443C;
+@define-color	winterRed		#43242B;
+@define-color	winterBlue		#252535;
+@define-color	autumnGreen		#76946A;
+@define-color	autumnRed		#C34043;
+@define-color	autumnYellow	#DCA561;
+@define-color	samuraiRed		#E82424;
+@define-color	roninYellow		#FF9E3B;
+@define-color	waveAqua1		#6A9589;
+@define-color	dragonBlue		#658594;
+@define-color	fujiGray		#727169;
+@define-color	springViolet1	#938AA9;
+@define-color	oniViolet		#957FB8;
+@define-color	crystalBlue		#7E9CD8;
+@define-color	springViolet2	#9CABCA;
+@define-color	springBlue		#7FB4CA;
+@define-color	lightBlue		#A3D4D5;
+@define-color	waveAqua2		#7AA89F;
+@define-color	springGreen		#98BB6C;
+@define-color	boatYellow1		#938056;
+@define-color	boatYellow2		#C0A36E;
+@define-color	carpYellow		#E6C384;
+@define-color	sakuraPink		#D27E99;
+@define-color	waveRed			#E46876;
+@define-color	peachRed		#FF5D62;
+@define-color	surimiOrange	#FFA066;
+@define-color	katanaGray		#717C7C;
+
+@define-color	bg0_h			@sumiInk0;
+@define-color	bg0				@sumiInk1;
+@define-color	bg1				@sumiInk2;
+@define-color	bg2				@sumiInk3;
+@define-color	bg3				@sumiInk4;
+
+@define-color	fg0				@oldWhite;
+@define-color	fg1				@fujiWhite;
+
+@define-color	red0			@samuraiRed;
+@define-color	red1			@peachRed;
+@define-color	red2			@waveRed;
+@define-color	red3			@autumnRed;
+
+@define-color	blue0			@waveBlue1;
+@define-color	blue1			@waveBlue2;
+@define-color	blue2			@crystalBlue;
+@define-color	blue3			@waveBlue1;
+@define-color	blue4			@waveBlue1;
+@define-color	blue5			@winterBlue;
+@define-color	blue6			@dragonBlue;
+
+@define-color	green0			@winterGreen;
+@define-color	green1			@autumnGreen;
+@define-color	green2			@springGreen;
+
+@define-color	yellow0			@winterYellow;
+@define-color	yellow1			@roninYellow;
+@define-color	yellow2			@boatYellow1;
+@define-color	yellow3			@boatYellow2;
+@define-color	yellow4			@carpYellow;
+@define-color	yellow5			@autumnYellow;
+
+@define-color	purple0			@springViolet1;
+@define-color	purple1			@springViolet2;
+@define-color	purple2			@oniViolet;
+
+@define-color	orange0			@surimiOrange;
+
+@define-color	pink			@sakuraPink;
+
+@define-color	teal0			@waveAqua1;
+@define-color	teal1			@waveAqua2;
+
+@define-color	cyan0			@springBlue;
+@define-color	cyan1			@lightBlue;
+
+@define-color	gray0			@fujiGray;
+@define-color	gray1			@katanaGray;

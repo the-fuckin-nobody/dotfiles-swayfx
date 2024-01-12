@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+GET_COLOR_CODE=$(hyprpicker -a -n && killall hyprppicker)
+
+fetch_color() {
+	if [[ $(pidof hyprpicker) ]]; then
+		killall hyprpicker
+		COLOR_CODE=$GET_COLOR_CODE
+	else
+		COLOR_CODE=$GET_COLOR_CODE
+	fi
+}
+
+convert_to_png() {
+	if [[ -n $(fetch_color && echo $COLOR_CODE) ]]; then
+		fetch_color && convert -size 64x64 xc:$COLOR_CODE /tmp/pixel.png
+		echo $COLOR_CODE
+		notify=$(notify-send "$COLOR_CODE copied to clipboard" -i /tmp/pixel.png)
+	fi
+}
+
+run() {
+	convert_to_png
+	rm -rf /tmp/pixel.png
+}
+
+run

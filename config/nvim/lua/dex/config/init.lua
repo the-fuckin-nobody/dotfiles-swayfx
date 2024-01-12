@@ -1,0 +1,5 @@
+require('dex.config.tabby')
+require('dex.config.cmp')
+require('dex.config.autopairs')
+require('dex.config.neotree')
+require('dex.config.lspconfig')

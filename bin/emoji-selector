@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+THEME_DIR="~/.config/rofi/"
+
+rofi -modi emoji -show emoji -theme "$THEME_DIR/emoji.rasi"

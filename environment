@@ -1,0 +1,14 @@
+# #
+# # This file is parsed by pam_env module
+# #
+# # Syntax: simple "KEY=VAL" pairs on separate lines
+# #
+QT_QPA_PLATFORM=wayland
+QT_QPA_PLATFORMTHEME=qt5ct
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/home/dex/.local/bin:/usr/share/applications:/usr/local/share/applications:/home/dex/.local/bin
+TERMINAL=foot
+SUDO_ASKPASS=/home/dex/.local/bin/ask-pass
+GTK_THEME=Kanagawa-B-LB
+XCURSOR_SIZE=30
+XCURSOR_THEME=Captaine-Kanagawa-cursors
+SHELL=/bin/fish

@@ -1,0 +1,106 @@
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 false;
+}
+
+/*****----- Global Properties -----*****/
+@import                          "~/.config/rofi/shared/colors.rasi"
+@import                          "~/.config/rofi/shared/fonts.rasi"
+
+/*
+USE_ICON=YES
+*/
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       300px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      2px solid;
+    border-radius:               5px;
+    border-color:                @bordercolor;
+    cursor:                      "default";
+    background-color:            @background;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     20px;
+    background-color:            transparent;
+    children:                    ["inputbar"];
+}
+
+dummy {
+    background-color:                  transparent;
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     0px;
+    padding:                     0px;
+    border:                      0px;
+    border-radius:               5px;
+    border-color:                @selected-background;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    children:                    [ "prompt","textbox-prompt-colon", "entry"];
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "󰟵";
+    vertical-align:              0.5;
+    font:			             "FantasqueSansM Nerd Font Propo 13";
+    padding:                     5px 10px;
+    border-radius:               5px 0px 0px 5px;
+    background-color:            @urgent-background;
+    text-color:                  @background;
+}
+prompt {
+    enabled:                     true;
+    padding:                     10px;
+    border-radius:               5px;
+    font:                        "FantasqueSansM Nerd Font Propo 10";
+    background-color:            @active-background;
+    text-color:                  @background;
+    margin:                      0px 5px 0px 0px;
+}
+
+entry {
+    enabled:                     true;
+	placeholder:				 "Enter the password ..";
+    padding:                     10px;
+    border:                      0px 0px 0px 0px;
+    border-radius:               0px 5px 5px 0px;
+    border-color:                @selected-background;
+    background-color:            @background-alt;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Password";
+    placeholder-color:           @foreground-alt;
+}
+
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  var(foreground);
+}
+element alternate.urgent {
+    background-color:            transparent;
+    text-color:                  var(foreground);
+}
+element alternate.active {
+    background-color:            transparent;
+    text-color:                  var(foreground);
+}
+

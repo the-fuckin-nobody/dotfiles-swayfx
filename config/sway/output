@@ -1,0 +1,10 @@
+#Display configuration
+output "eDP-1" {
+    scale		1
+    adaptive_sync 	on
+    scale_filter smart
+    subpixel rgb
+    max_render_time 	5
+    render_bit_depth 	10
+    bg			/home/dex/.local/share/wallpapers/ideapad-wallpaper.png  stretch 
+}

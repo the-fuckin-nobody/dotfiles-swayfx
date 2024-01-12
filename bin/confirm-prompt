@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+yes=''
+no=''
+confirm_cmd() {
+	rofi -dmenu \
+		-p 'Confirmation' \
+		-mesg 'Are you Sure?' \
+		-theme /home/dex/.config/rofi/confirm.rasi
+	}
+
+# Ask for confirmation
+confirm_exit() {
+	echo -e "$yes\n$no" | confirm_cmd
+}
+
+# Confirm and execute
+confirm_run () {	
+	selected="$(confirm_exit)"
+	if [[ "$selected" == "$yes" ]]; then
+		${1} && ${2} && ${3}
+	else
+		exit
+	fi	
+}
+
+confirm_run $1 $2 $3

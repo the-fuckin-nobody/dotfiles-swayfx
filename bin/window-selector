@@ -1,0 +1,5 @@
+#!usr/bin/env bash
+
+THEME_DIR="~/.config/rofi/"
+
+rofi -show window -theme "$THEME_DIR/windows.rasi"

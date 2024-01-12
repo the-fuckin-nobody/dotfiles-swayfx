@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+yes=''
+no=''
+
+confirmation_prompt() {
+    echo -e "$yes\n$no" | rofi -dmenu -mesg "Do you really want to exit $DESKTOP_SESSION?" \
+    -theme ~/.config/rofi/confirm.rasi \
+    -width 500
+}
+
+confirmation_prompt | while read -r selection; do
+    case $selection in
+        $yes)
+            case $DESKTOP_SESSION in
+                hyprland)
+                    hyprctl exit
+                    ;;
+                sway)
+                    swaymsg exit
+                    ;;
+                *)
+                    ;;
+            esac
+            ;;
+        $no)
+            ;;
+    esac
+done

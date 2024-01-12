@@ -1,0 +1,80 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+time=$(date +%Y-%m-%d-%H-%M-%S)
+dir="$HOME/Pictures/Screenshots"
+file="Screenshot_${time}.png"
+iconsDir="$HOME/.local/share/icons/"
+
+# notify and view screenshot
+notify_view() {
+	notify_cmd_shot='notify-send -u normal'
+	${notify_cmd_shot} -h string:x-canonical-private-synchronous:screenshot -i $iconsDir/Qogir-dark/symbolic/status/clipboard-text-outline-symbolic.svg "Screenshot copied to clipboard."
+	paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga &>/dev/null &
+    echo "$dir/$file"
+	imv "${dir}/${file}"
+	if [[ -e "$dir/$file" ]]; then
+		${notify_cmd_shot} -h string:x-canonical-private-synchronous:screenshot -i $iconsDir/Qogir-dark/symbolic/categories/xapp-prefs-preview-symbolic.svg "Screenshot saved as \"${file}\""
+	else
+		${notify_cmd_shot} -i string:x-canonical-private-synchronous:screenshot $iconsDir/Qogir-dark/symbolic/actions/app-remove-symbolic.svg "Screenshot Deleted."
+	fi
+}
+
+copy_shot() {
+    echo $file
+	tee "$file" | wl-copy --type image/png
+}
+
+# take shots
+shotnow() {
+	cd ${dir} && wayshot --stdout | copy_shot
+	notify_view
+}
+
+shotwin_active() {
+	FOCUSED=$(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?, .floating_nodes[]?) | select(.focused)')
+	area=$(echo "$FOCUSED" | jq -r '.rect | "\(.x),\(.y) \(.width)x\(.height)"')
+    if [ ! -z "$FOCUSED" ]; then
+		cd ${dir} && wayshot -s "$area" --stdout | copy_shot
+		notify_view
+	fi
+}
+
+shotwin_selected() {
+	area=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -d -b "#1f1f28aa" -c "#c8c093aa" -F "IosevkaTerm Nerd Font")
+	if [ ! -z "$area" ]; then
+		cd ${dir} && wayshot -s "$area" --stdout | copy_shot
+		notify_view
+	fi
+}
+
+shotarea() {
+	area=$(slurp -d -b "#1f1f28aa" -c "#c8c093aa" -F "IosevkaTerm Nerd Font")
+	if [ ! -z "$area" ]; then
+		cd ${dir} && wayshot -s "$area" --stdout | copy_shot
+		notify_view
+	fi
+}
+
+take_screenshot() {
+	if [[ "$1" == "--full" ]]; then
+		shotnow
+	elif [[ "$1" == "--active-win" ]]; then
+		shotwin_active
+	elif [[ "$1" == "--select-win" ]]; then
+		shotwin_selected
+	elif [[ "$1" == "--area" ]]; then
+		shotarea
+	else
+		echo "Usage: screenshot [--full | --active-win | --select-win | --area]"
+		echo "Available options:"
+		echo "    --full        Take a screenshot of the entire screen."
+		echo "    --active-win  Take a screenshot of the active window."
+		echo "    --select-win  Take a screenshot of a selected window."
+		echo "    --area        Take a screenshot of a selected area."
+	fi
+
+}
+
+take_screenshot "$@"
