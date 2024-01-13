@@ -40,7 +40,11 @@ There's a few steps involved in the installation process:
 
     Alternatively you can use the following command to install all of the above packages:
     ```
+<<<<<<< HEAD
     sudo pacman -Syyu foot waybar fish starship neovim dunst kvantum qt5ct qt6ct swayimg slurp pacman-contrib jq ttf-iosevkaterm-nerd ttf-fantasque-nerd rofi-emoji wl-clipboard
+=======
+    sudo pacman -Syyu foot waybar fish starship neovim dunst kvantum qt5ct qt6ct swayimg slurp pacman-contrib jq ttf-iosevkaterm-nerd ttf-fantasque-nerd
+>>>>>>> refs/remotes/origin/master
     ```
 
 1. Install the following packages from the [**AUR**](https://aur.archlinux.org), manually or from your favourite AUR helper like [**paru**](https:/github.com/https://github.com/Morganamilo/paru):
@@ -50,7 +54,7 @@ There's a few steps involved in the installation process:
     - [**swaylock-effects-imporved-git**](https://github.com/Xenfo/swaylock-effects-improved) (A fancier screen locker for Wayland.)
     - [**wayshot**](https://github.com/waycrate/wayshot) (A Screenshot utility for wl-roots based compositors written in Rust.)
     - [**sddm-git**](https://github.com/sddm/sddm) (A QML based display manager for X11 and Wayland.)
-    - [**ttf-apple-emoji**] (Apple Color Emoji's)
+    - **ttf-apple-emoji** (Apple Color Emoji's)
 
     If you are using `paru`, you can run the following command in your terminal to install all of the above packages:
     ```
