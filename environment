@@ -12,3 +12,4 @@ GTK_THEME=Kanagawa-B-LB
 XCURSOR_SIZE=30
 XCURSOR_THEME=Captaine-Kanagawa-cursors
 SHELL=/bin/fish
+ICON_THEME=Qogir-dark

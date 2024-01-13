@@ -289,7 +289,7 @@
 		"format": "{}",
 		"exec": "echo '{\"text\":\"󰿅\", \"tooltip\":\"Exit Session 󰿅\"}'",
 		"tooltip-format": "{tooltip}",
-		"on-click": "killall rofi || confirm-prompt hyprctl dispatch exit",
+		"on-click": "killall rofi || end-session",
 		"return-type": "json"
 	}
 }

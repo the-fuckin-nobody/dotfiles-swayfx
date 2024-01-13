@@ -37,7 +37,8 @@ ENC = locale.getpreferredencoding()
 
 CONF = configparser.ConfigParser()
 CONF.read(expanduser("~/.config/networkmanager-dmenu/config.ini"))
-HOME_DIR = os.environ['HOME']
+HOME_DIR = ENV['HOME']
+ICON_THEME = ENV['ICON_THEME']
 
 
 def cli_args():
@@ -199,11 +200,11 @@ def rescan_wifi():
                 dev.request_scan_async(None, rescan_cb, None)
                 LOOP.run()
                 sleep(delay)
-                notify("Wifi scan complete", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/process-completed-symbolic.svg")
+                notify("Wifi scan complete", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/process-completed-symbolic.svg")
                 main()
             except gi.repository.GLib.Error as err:
                 # Too frequent rescan error
-                notify("Wifi rescan failed", urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/process-error-symbolic.svg")
+                notify("Wifi rescan failed", urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/process-error-symbolic.svg")
                 if not err.code == 6:  # pylint: disable=no-member
                     raise err
 
@@ -213,9 +214,9 @@ def rescan_cb(dev, res, data):
 
     """
     if dev.request_scan_finish(res) is True:
-        notify("Wifi scan running...", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/22/actions/collection-rescan-amarok.svg")
+        notify("Wifi scan running...", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/22/actions/collection-rescan-amarok.svg")
     else:
-        notify("Wifi scan failed", urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/process-error-symbolic.svg")
+        notify("Wifi scan failed", urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/process-error-symbolic.svg")
     LOOP.quit()
 
 
@@ -352,9 +353,9 @@ def activate_cb(dev, res, data):
     except GLib.Error:
         conn = None
     if conn is not None:
-        notify(f"Activated {conn.get_id()}", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/network-wireless-signal-excellent-secure-symbolic.svg")
+        notify(f"Activated {conn.get_id()}", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/network-wireless-signal-excellent-secure-symbolic.svg")
     else:
-        notify(f"Problem activating {data.get_id()}", urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/network-wireless-error-symbolic.svg")
+        notify(f"Problem activating {data.get_id()}", urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/network-wireless-error-symbolic.svg")
     LOOP.quit()
 
 
@@ -363,9 +364,9 @@ def deactivate_cb(dev, res, data):
 
     """
     if dev.deactivate_connection_finish(res) is True:
-        notify(f"Deactivated {data.get_id()}", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/network-wireless-disconnected-symbolic.svg")
+        notify(f"Deactivated {data.get_id()}", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/network-wireless-disconnected-symbolic.svg")
     else:
-        notify(f"Problem deactivating {data.get_id()}", urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/dialog-error-symbolic.svg")
+        notify(f"Problem deactivating {data.get_id()}", urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/dialog-error-symbolic.svg")
     LOOP.quit()
 
 
@@ -591,9 +592,9 @@ def toggle_wifi(enable):
         # Workaround for older versions of python-gobject
         CLIENT.wireless_set_enabled(enable)
     if enable is True:
-        notify("Wifi enabled", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/network-wireless-connected-symbolic.svg")
+        notify("Wifi enabled", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/network-wireless-connected-symbolic.svg")
     else:
-        notify("Wifi disabled", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/network-wireless-disabled-symbolic.svg")
+        notify("Wifi disabled", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/network-wireless-disabled-symbolic.svg")
 
 
 def toggle_wwan(enable):
@@ -642,9 +643,9 @@ def toggle_bluetooth(enable):
                urgency="critical")
     else:
         if enable:
-            notify("Bluetooth enabled", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/bluetooth-active-symbolic.svg")
+            notify("Bluetooth enabled", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/bluetooth-active-symbolic.svg")
         else:
-            notify("Bluetooth disabled", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/status/bluetooth-disabled-symbolic.svg")
+            notify("Bluetooth disabled", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/status/bluetooth-disabled-symbolic.svg")
 
 
 def launch_connection_editor():
@@ -717,9 +718,9 @@ def delete_cb(dev, res, data):
 
     """
     if dev.delete_finish(res) is True:
-        notify(f"Deleted {dev.get_id()}", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/actions/edit-delete-symbolic.svg")
+        notify(f"Deleted {dev.get_id()}", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/actions/edit-delete-symbolic.svg")
     else:
-        notify(f"Problem deleting {dev.get_id()}", urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/actions/builder-unit-tests-fail-symbolic.svg")
+        notify(f"Problem deleting {dev.get_id()}", urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/actions/builder-unit-tests-fail-symbolic.svg")
     LOOP.quit()
 
 
@@ -804,11 +805,11 @@ def verify_conn(client, result, data):
                     data.verify(),
                     data.verify_secrets()]):
             raise GLib.Error
-        notify(f"Added {conn.get_id()}", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/actions/builder-unit-tests-pass-symbolic.svg")
+        notify(f"Added {conn.get_id()}", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/actions/builder-unit-tests-pass-symbolic.svg")
     except GLib.Error:
         try:
             notify(f"Connection to {conn.get_id()} failed",
-                   urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/Qogir-dark/symbolic/actions/builder-unit-tests-fail-symbolic.svg")
+                   urgency="critical", icon=f"{HOME_DIR}/.local/share/icons/{ICON_THEME}/symbolic/actions/builder-unit-tests-fail-symbolic.svg")
             conn.delete_async(None, None, None)
         except UnboundLocalError:
             pass

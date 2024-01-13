@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+CARD=$(ls /sys/class/backlight/ | grep -E 'intel|nvidia')
+MAX_BRIGHTNESS=$(cat /sys/class/backlight/$CARD/max_brightness)
+CURRENT_BRIGHTNESS=$(cat /sys/class/backlight/$CARD/brightness)
+EFFECTIVE_BRIGHTNESS=$(($CURRENT_BRIGHTNESS * 100 / 800))
+
+
+main() {
+    case $1 in
+        up)
+            if [[ $(($2 + $EFFECTIVE_BRIGHTNESS)) -le 100 ]]; then
+                EFFECTIVE_INC=$(($2 * MAX_BRIGHTNESS / 100))
+                echo $(($CURRENT_BRIGHTNESS + $EFFECTIVE_INC)) > /sys/class/backlight/$CARD/brightness
+            else
+                echo "Invalid value given"
+            fi
+            ;;
+        down)
+            if [[ $(($EFFECTIVE_BRIGHTNESS - $2)) -ge 0 ]]; then
+                EFFECTIVE_DEC=$(($2 * MAX_BRIGHTNESS / 100))
+                echo $(($CURRENT_BRIGHTNESS - $EFFECTIVE_DEC)) > /sys/class/backlight/$CARD/brightness
+            else
+                echo "Invalid value given"
+            fi
+            ;;
+        set)
+            if [[ $2 -le 100 && $2 -ge 0 ]]; then
+                echo $(($2 * 800 / 100)) > /sys/class/backlight/$CARD/brightness
+            fi
+            ;;
+        get)
+            echo $EFFECTIVE_BRIGHTNESS
+            ;;
+        *)
+            echo "Usage: $0 {up|down|set}"
+            exit 1
+    esac
+}
+
+main $1 $2

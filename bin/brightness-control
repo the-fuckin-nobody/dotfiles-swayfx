@@ -1,24 +1,17 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 
 
 # Icons
-iDIR="$HOME/.config/dunst/icons"
+iDIR=$HOME/.config/dunst/icons
 
 # Graphics card
 CARD=$(ls /sys/class/backlight | head -n 1)
 
 notify_cmd='notify-send -u low -h string:x-canonical-private-synchronous:system-notfications'
-# Get brightness
-get_backlight() {
-    RAW_BRIGHTNESS=$(brightnessctl g)
-    MAX_BRIGHTNESS=$(brightnessctl m)
-    ACTUAL_BRIGHTNESS=$(($RAW_BRIGHTNESS * 100 / $MAX_BRIGHTNESS))
-    echo "$ACTUAL_BRIGHTNESS%"
-}
 
 # Get icons
 get_icon() {
-	backlight="$(get_backlight)"
+	backlight="$(backlightctl get)"
 	current="${backlight%%%}"
 	if [[ "$current" -eq "0" ]]; then
 		icon="$iDIR"/brightness-0.svg
@@ -51,18 +44,18 @@ get_icon() {
 
 # Notify
 notify_bl() {
-	get_icon && ${notify_cmd} -h int:value:$(get_backlight) -i "$icon" "Current Brightness: $(get_backlight)"
+    get_icon && ${notify_cmd} -h int:value:$(backlightctl get) -i "$icon" "Current Brightness: $(backlightctl get)%"
 }
 
 # Increase brightness
 inc_backlight() {
-    brightnessctl set +$1% > /dev/null
+    backlightctl up 1 > /dev/null
     notify_bl
 }
 
 # Decrease brightness
 dec_backlight() {
-    brightnessctl set $1%- > /dev/null
+    backlightctl down 1 > /dev/null
     notify_bl
 }
 

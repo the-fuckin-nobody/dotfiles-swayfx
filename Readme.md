@@ -31,14 +31,16 @@ There's a few steps involved in the installation process:
     - **qt6ct** (Applying themes for qt6 applications.)
     - [**swayimg**](https://github.com/artemsen/swayimg) (A lightweight image viewer for wayland.)
     - [**jq**](https://github.com/jqlang/jq) (A Command-line JSON processor)
-    - **slurp** (Select a region in a Wayland Compositor)
+    - [**slurp**](https://github.com/emersion/slurp) (Select a region in a Wayland Compositor)
     - **pacman-contrib** (Contributed scripts and tools for pacman systems.)
     - **ttf-iosevkaterm-nerd**
     - **ttf-fantasque-nerd**
+    - [**wl-clipboard**](https://github.com/bugaevc/wl-clipboard) (Provides commands like `wl-copy` and `wl-paste`)
+    - [**rofi-emoji**](https://github.com/Mange/rofi-emoji) (Emoji selection via rofi)
 
     Alternatively you can use the following command to install all of the above packages:
     ```
-    sudo pacman -Syyu foot waybar fish starfish neovim dusnt kvantum qt5ct qt6ct swayimg slurp pacman-contrib jq ttf-iosevkaterm-nerd ttf-fantasque-nerd
+    sudo pacman -Syyu foot waybar fish starship neovim dunst kvantum qt5ct qt6ct swayimg slurp pacman-contrib jq ttf-iosevkaterm-nerd ttf-fantasque-nerd rofi-emoji wl-clipboard
     ```
 
 1. Install the following packages from the [**AUR**](https://aur.archlinux.org), manually or from your favourite AUR helper like [**paru**](https:/github.com/https://github.com/Morganamilo/paru):
@@ -101,7 +103,10 @@ There's a few steps involved in the installation process:
     cd ~/dotfiles-swayfx
     sudo cp environment /etc/environment
     ```
+
 ## Note:
+***Please do not remove the Qogir icons folder!***
+
 I have just included a single wallpaper here, to keep the size of the repo as minimal as possible. So if you need more wallpapers, check out [this](https://github.com/the-fuckin-nobody/wallpapers) repository
 
 **The setup must now be completed! Just give your system a reboot :-)**
