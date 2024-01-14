@@ -18,6 +18,7 @@
 		"custom/packages"
 	],
 	"modules-right": [
+//		"custom/conv_mode",
 		"network",
 		"wireplumber",
 		"backlight",
@@ -244,6 +245,13 @@
 		"on-click": "killall rofi || application-launcher",
 		"return-type": "json"
 	},
+//	"custom/conv_mode": {
+//		"format": "{}",
+//		"exec": "conv_mode --stats",
+//		"on-click": "exec conv_mode --toggle",
+//		"return-type": "json",
+//		"interval": 1
+//	},
 	"group/sysmenu": {
 		"modules": [
 			"custom/poweroff",
@@ -281,7 +289,7 @@
 		"format": "{}",
 		"exec": "echo '{\"text\":\"󰿅\", \"tooltip\":\"Exit Session 󰿅\"}'",
 		"tooltip-format": "{tooltip}",
-		"on-click": "killall rofi || end-session",
+		"on-click": "killall rofi || confirm-prompt hyprctl dispatch exit",
 		"return-type": "json"
 	}
 }
