@@ -337,7 +337,7 @@ label:focus {
 	border-bottom-left-radius: 0%;
 	color: @fg1;
 }
-
+/**
 #custom-conv_mode.on {
 	color: @blue2;
 	background: @bg0;
@@ -347,7 +347,7 @@ label:focus {
 	color: @red0;
 	background: @bg0;
 }
-
+**/
 tooltip {
     border-radius: 10px;
     background: rgba(31, 31, 41, 0.8);
