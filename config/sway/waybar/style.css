@@ -26,16 +26,16 @@ window#waybar {
     animation: gradient_f 20s ease-in infinite;
     transition: all 0.35s cubic-bezier(.55,-0.68,.48,1.682);
     border-radius: 20px;
-    border: 1px solid rgba(31, 31, 41, 1);
+    border: 1px solid @bg0_h;
     box-shadow: 0px 0px @bg0_h;
     margin: 1px 1px;
-    padding: 0px;
+    padding: 0px 10px;
     background: linear-gradient(-45deg, @pink, @purple0, @purple2);
     color: @bg1;
 }
 
 #workspaces button:hover {
-    padding: 0px 5px;
+    padding: 0px 15px;
     margin: 0px 1px;
     font-size: 16px;
     border: 2px solid @bg0_h;
@@ -44,7 +44,7 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    padding: 0px 5px;
+    padding: 0px 15px;
     background: linear-gradient(-45deg, @blue2, @teal0, @green1);
     border: 2px solid @bg0_h;
     margin: 0px 1px;
@@ -52,7 +52,7 @@ window#waybar {
 }
 
 #workspaces button.focused:hover {
-    padding: 0px 8px;
+    padding: 0px 18px;
     font-size: 16px;
     margin: 0px 1px;
     border: 2px solid @bg0_h;
@@ -67,6 +67,7 @@ window#waybar {
 #button {
     border-radius: 0px;
 }
+
 @keyframes blink-workspaces {
     to {
         color: @fg0;
@@ -88,7 +89,7 @@ window#waybar {
 #scratchpad,
 #custom-packages,
 #custom-launcher,
-#custom-poweroff,
+#custom-sysmenu,
 #custom-memory,
 #custom-conv_mode,
 #window,
@@ -289,7 +290,7 @@ label:focus {
     padding: 0 10px;
 }
 
-#custom-poweroff{
+#custom-sysmenu{
     background: @bg0;
     color: @red3;
     font-size: 15px;
@@ -337,7 +338,7 @@ label:focus {
 	border-bottom-left-radius: 0%;
 	color: @fg1;
 }
-/**
+
 #custom-conv_mode.on {
 	color: @blue2;
 	background: @bg0;
@@ -347,7 +348,7 @@ label:focus {
 	color: @red0;
 	background: @bg0;
 }
-**/
+
 tooltip {
     border-radius: 10px;
     background: rgba(31, 31, 41, 0.8);
