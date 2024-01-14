@@ -10,7 +10,12 @@
 	"passthrough": false,
 	"gtk-layer-shell": true,
 	"modules-left": [
-		"group/left",
+		"custom/launcher",
+        "cpu",
+        "custom/memory",
+        "disk",
+        "clock",
+        "idle_inhibitor"
 	],
 	"modules-center": [
         "sway/window",
@@ -18,13 +23,13 @@
 		"custom/packages"
 	],
 	"modules-right": [
-//		"custom/conv_mode",
+		"custom/conv_mode",
 		"network",
 		"wireplumber",
 		"backlight",
 		"battery",
 		"tray",
-		"group/sysmenu"
+		"custom/sysmenu"
 	],
     "sway/workspaces": {
         "format": "{icon}",
@@ -245,13 +250,13 @@
 		"on-click": "killall rofi || application-launcher",
 		"return-type": "json"
 	},
-//	"custom/conv_mode": {
-//		"format": "{}",
-//		"exec": "conv_mode --stats",
-//		"on-click": "exec conv_mode --toggle",
-//		"return-type": "json",
-//		"interval": 1
-//	},
+	"custom/conv_mode": {
+		"format": "{}",
+		"exec": "conv_mode --stats",
+		"on-click": "exec conv_mode --toggle",
+		"return-type": "json",
+		"interval": 1
+	},
 	"group/sysmenu": {
 		"modules": [
 			"custom/poweroff",
@@ -291,5 +296,15 @@
 		"tooltip-format": "{tooltip}",
 		"on-click": "killall rofi || confirm-prompt hyprctl dispatch exit",
 		"return-type": "json"
-	}
+	}, 
+    "custom/sysmenu": {
+        "format": "<big>{icon}</big>",
+        "format-icons": [
+            "󰐥"
+        ],
+        "tooltip-format": "{tooltip}",
+        "exec": "echo '{\"text\":\"󰐥\", \"tooltip\":\"System Menu\"}'",
+        "on-click": "killall rofi || powermenu",
+        "return-type": "json"
+    }
 }
