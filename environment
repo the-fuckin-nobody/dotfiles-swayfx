@@ -5,9 +5,9 @@
 # #
 QT_QPA_PLATFORM=wayland
 QT_QPA_PLATFORMTHEME=qt5ct
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/home/dex/.local/bin:/usr/share/applications:/usr/local/share/applications:/home/dex/.local/bin
+PATH=$PATH:/home/$USER/.local/bin
 TERMINAL=foot
-SUDO_ASKPASS=/home/dex/.local/bin/ask-pass
+SUDO_ASKPASS=/home/$USER/.local/bin/ask-pass
 GTK_THEME=Kanagawa-B-LB
 XCURSOR_SIZE=30
 XCURSOR_THEME=Captaine-Kanagawa-cursors

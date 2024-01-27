@@ -53,7 +53,7 @@ notify_view() {
 	notify_cmd_shot='notify-send -u low -h string:x-dunst-stack-tag:obscreenshot'
 	${notify_cmd_shot} -i $iconsDir/Qogir-dark/symbolic/status/clipboard-text-outline-symbolic.svg "Screenshot taken and copied to clipboard."
 	paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga &>/dev/null &
-	imv ${dir}/"$file"
+	swayimg -s fit ${dir}/"$file"
 	if [[ -e "$dir/$file" ]]; then
 		${notify_cmd_shot} -i $iconsDir/Qogir-dark/symbolic/categories/xapp-prefs-preview-symbolic.svg "Screenshot Saved."
 	else
@@ -73,26 +73,37 @@ shotnow() {
 }
 
 shotwin_active() {
-	FOCUSED=$(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?, .floating_nodes[]?) | select(.focused)')
-	area=$(echo "$FOCUSED" | jq -r '.rect | "\(.x),\(.y) \(.width)x\(.height)"')
+    if [ $DESKTOP_SESSION == "sway" ]; then
+        FOCUSED=$(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?, .floating_nodes[]?) | select(.focused)')
+        AREA=$(echo "$FOCUSED" | jq -r '.rect | "\(.x),\(.y) \(.width)x\(.height)"')
+    elif [ $DESKTOP_SESSION == "hyprland" ]; then
+        FOCUSED=$(hyprctl -j activewindow | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
+        AREA=$FOCUSED
+    fi
     if [ ! -z "$FOCUSED" ]; then
-		cd ${dir} && wayshot -s "$area" --stdout | copy_shot
+		cd ${dir} && wayshot -s "$AREA" --stdout | copy_shot
 		notify_view
 	fi
 }
 
 shotwin_selected() {
-	area=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -d -b "#1f1f28aa" -c "#c8c093aa" -F "IosevkaTerm Nerd Font")
-	if [ ! -z "$area" ]; then
-		cd ${dir} && wayshot -s "$area" --stdout | copy_shot
+    if [ $DESKTOP_SESSION == "sway" ]; then
+        AREA=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -d -b "#1f1f28aa" -c "#c8c093aa" -F "IosevkaTerm Nerd Font")
+    elif [ $DESKTOP_SESSION == "hyprland" ]; then
+        echo "pass"
+        WS_NAME=$(hyprctl -j activeworkspace | jq -r '.id')
+        AREA=$(hyprctl -j clients | jq --arg ws_name "$WS_NAME" -r '.[] | select(.workspace.name == $ws_name) | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | slurp -d -b "#ffffff20" -c "#cba6f7" -F "IosevkaTerm Nerd Font")
+    fi
+    if [ ! -z "$AREA" ]; then
+		cd ${dir} && wayshot -s "$AREA" --stdout | copy_shot
 		notify_view
 	fi
 }
 
 shotarea() {
-	area=$(slurp -d -b "#1f1f28aa" -c "#c8c093aa" -F "IosevkaTerm Nerd Font")
-	if [ ! -z "$area" ]; then
-		cd ${dir} && wayshot -s "$area" --stdout | copy_shot
+	AREA=$(slurp -d -b "#1f1f28aa" -c "#c8c093aa" -F "IosevkaTerm Nerd Font")
+	if [ ! -z "$AREA" ]; then
+		cd ${dir} && wayshot -s "$AREA" --stdout | copy_shot
 		notify_view
 	fi
 }

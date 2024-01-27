@@ -6,5 +6,4 @@ output "eDP-1" {
     subpixel rgb
     max_render_time 	5
     render_bit_depth 	10
-    bg			/home/dex/.local/share/wallpapers/ideapad-wallpaper.png  stretch 
 }

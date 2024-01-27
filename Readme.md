@@ -37,10 +37,13 @@ There's a few steps involved in the installation process:
     - **ttf-fantasque-nerd**
     - [**wl-clipboard**](https://github.com/bugaevc/wl-clipboard) (Provides commands like `wl-copy` and `wl-paste`)
     - [**rofi-emoji**](https://github.com/Mange/rofi-emoji) (Emoji selection via rofi)
+    - [**dolphin**]() (A super extensible and powerful file manager by KDE)
+    - [**ark**](https://github.com/KDE/ark) (File archiver by KDE)
+    - [****]
 
     Alternatively you can use the following command to install all of the above packages:
     ```
-    sudo pacman -Syyu foot waybar fish starship neovim dunst kvantum qt5ct qt6ct swayimg slurp pacman-contrib jq ttf-iosevkaterm-nerd ttf-fantasque-nerd rofi-emoji wl-clipboard
+    sudo pacman -Syyu foot waybar fish starship neovim dunst kvantum qt5ct qt6ct swayimg slurp pacman-contrib jq ttf-iosevkaterm-nerd ttf-fantasque-nerd rofi-emoji wl-clipboard dolhin
     ```
 
 1. Install the following packages from the [**AUR**](https://aur.archlinux.org), manually or from your favourite AUR helper like [**paru**](https:/github.com/https://github.com/Morganamilo/paru):
@@ -103,10 +106,22 @@ There's a few steps involved in the installation process:
     cd ~/dotfiles-swayfx
     sudo cp environment /etc/environment
     ```
-
+# Keymaps
+    + SUPER+SHIFT+R -> reload sway
+    + SUPER+SHIFT+E -> exit sway
+    + SUPER+q -> close/kill the current window
+    + SUPER+f -> fullscreen the current window
+    + SUPER+[1-8] -> switch to workspaces[1-8]
+    + SUPER+SHIFT+[1-8] -> move current window to workspaces[1-8]
+    + SUPER+SHIFT
 ## Note:
-***Please do not remove the Qogir icons folder!***
-
+- **The themes for QT applications won't apply by themselves, Following are the steps to do so:**
+    + Open qt5ct/qt6ct from terminal or rofi
+    + Change the style to Kvantum
+    + Change the font if you want to
+    + Open kvantummanager, then apply the Kanagawa theme from the dropdown menu
+    + Close all the QT apps and reopen them
+-
 I have just included a single wallpaper here, to keep the size of the repo as minimal as possible. So if you need more wallpapers, check out [this](https://github.com/the-fuckin-nobody/wallpapers) repository
 
 **The setup must now be completed! Just give your system a reboot :-)**

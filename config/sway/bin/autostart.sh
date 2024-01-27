@@ -4,9 +4,9 @@ export GTK_THEME=Kanagawa-B
 export SHELL=/bin/fish
 #Start the swww daemon and set wallpaper
 if [[ $(pidof swww-daemon) ]]; then
-    swww kill && swww init --no-cache && swww img /home/dex/.local/share/wallpapers/wallhaven-k77xrm_1920x1080.png --resize crop --filter Nearest --transition-type wipe --transition-step 90 --transition-duration 1 --transition-angle 45 --transition-pos top-left
+    swww kill && swww init --no-cache && swww img /home/$USER/.local/share/wallpapers/wallhaven-k77xrm_1920x1080.png --resize crop --filter Nearest --transition-type wipe --transition-step 90 --transition-duration 1 --transition-angle 45 --transition-pos top-left
 else
-    swww init --no-cache && swww img /home/dex/.local/share/wallpapers/wallhaven-k77xrm_1920x1080.png --resize crop --filter Nearest --transition-type wipe --transition-step 90 --transition-duration 1 --transition-angle 45 --transition-pos top-left 
+    swww init --no-cache && swww img /home/$USER/.local/share/wallpapers/wallhaven-k77xrm_1920x1080.png --resize crop --filter Nearest --transition-type wipe --transition-step 90 --transition-duration 1 --transition-angle 45 --transition-pos top-left 
 fi
 
 #Start the polkit agent
