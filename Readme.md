@@ -1,4 +1,7 @@
 # dotfiles-swayfx
+>[!WARNING]
+>These dotfiles are now abandoned as I have now moved from swayfx to Hyprland, these are just as a backup, in case I `rm -rf` my `.config` dir.
+
 
 **Dotfiles for my sway workflow**
 # Showcase
